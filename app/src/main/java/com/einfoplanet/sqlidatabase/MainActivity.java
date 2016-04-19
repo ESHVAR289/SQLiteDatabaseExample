@@ -21,20 +21,23 @@ public class MainActivity extends AppCompatActivity {
         //creating an instance of DBAdapter
         DBAdapter dbAdapter=new DBAdapter(this);
 
-        //get a contact
+       //get all contacts
         dbAdapter.open();
-        Cursor cursor=dbAdapter.getContact(2);
+        Cursor cursor= dbAdapter.getAllContacts();
         if (cursor.moveToFirst()){
-            displayContact(cursor);
-        }
-        else Toast.makeText(this,"NO CONTACT FOUND",Toast.LENGTH_LONG).show();
+            do {
+                displayContact(cursor);
+            }while (cursor.moveToNext());
+            }
         dbAdapter.close();
-    }
+        }
+
+
 
     private String displayContact(Cursor cursor) {
         String str;
-         str=cursor.getString(1)+"\n"+cursor.getString(2);
-
+         str="ID ="+cursor.getString(0)+"\nName ="+cursor.getString(1)+"\nEmail ="+cursor.getString(2);
+        Toast.makeText(this,str,Toast.LENGTH_LONG).show();
         textView.setText(str);
         textView.setVisibility(View.VISIBLE);
         return  str;

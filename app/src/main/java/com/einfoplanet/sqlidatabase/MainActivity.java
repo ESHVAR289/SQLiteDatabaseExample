@@ -22,7 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
         dbAdapter.close();*/
 
+        //Deleting the contact from a table
+        dbAdapter.open();
+        if (dbAdapter.deleteContact(1))
+            Toast.makeText(this,"Contact Deleted Successfully",Toast.LENGTH_LONG).show();
 
+        else
+            Toast.makeText(this,"Deletion unsuccesfull",Toast.LENGTH_LONG).show();
+
+        dbAdapter.close();
 
     }
 }

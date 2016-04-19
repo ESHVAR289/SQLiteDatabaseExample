@@ -101,4 +101,13 @@ public class DBAdapter {
 
         return mCursor;
     }
+
+    //updates a contact
+    public boolean updateContact(long rowId,String name,String email){
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(KEY_NAME,name);
+        contentValues.put(KEY_EMAIL,email);
+
+        return db.update(DATABASE_TABLE,contentValues,KEY_ROWID+"="+rowId,null)>0;
+    }
 }

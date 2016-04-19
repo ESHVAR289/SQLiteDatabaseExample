@@ -1,6 +1,9 @@
 package com.einfoplanet.sqlidatabase;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.DataSetObservable;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -73,6 +76,29 @@ public class DBAdapter {
 
     //insert a contact into the database
     public long insertContact(String name,String email){
+        ContentValues initialValues=new ContentValues();
+        initialValues.put(KEY_NAME,name);
+        initialValues.put(KEY_EMAIL,email);
 
+        return db.insert(DATABASE_TABLE,null,initialValues);
+    }
+
+    //delete a particular contact
+    public boolean deleteContact(long rowId){
+        return db.delete(DATABASE_TABLE,KEY_ROWID+"="+rowId,null)>0;
+    }
+
+    //retrieve all the contacts
+    public Cursor getAllContacts(){
+        return  db.query(DATABASE_TABLE,new String[] {KEY_ROWID,KEY_NAME,KEY_EMAIL},null,null,null,null,null);
+    }
+
+    //retrieve a particular contact
+    public Cursor getContact(long rowId) throws  SQLException{
+        Cursor mCursor=db.query(true,DATABASE_TABLE,new String[]{KEY_ROWID,KEY_NAME,KEY_EMAIL},KEY_ROWID+"="+rowId,null,null,null,null,null);
+        if (mCursor != null)
+            mCursor.moveToFirst();
+
+        return mCursor;
     }
 }

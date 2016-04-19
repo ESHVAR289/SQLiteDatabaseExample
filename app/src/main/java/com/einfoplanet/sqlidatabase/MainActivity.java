@@ -14,12 +14,15 @@ public class MainActivity extends AppCompatActivity {
         //instance for the DBAdapter class
         DBAdapter dbAdapter=new DBAdapter(this);
 
-        dbAdapter.open();
-        if (dbAdapter.updateContact(1,"Eshvar Mali","eshvar89@hotmail.com")){
+       /* dbAdapter.open();
+        if (dbAdapter.updateContact(1,"Eshvar Mali","eshvar289@hotmail.com")){
             Toast.makeText(this,"Update Successfully.",Toast.LENGTH_LONG).show();
         }else
             Toast.makeText(this,"Update failed",Toast.LENGTH_LONG).show();
 
-        dbAdapter.close();
+        dbAdapter.close();*/
+
+
+
     }
 }
